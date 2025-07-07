@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import entities.Product;
 import db.DB;
 
 public class Program {
 
 	public static void main(String[] args) throws SQLException {
+		
+		Product p = new Product();
 		
 		Connection conn = DB.getConnection();
 	
@@ -18,7 +20,15 @@ public class Program {
 		ResultSet rs = st.executeQuery("select * from tb_product");
 			
 		while (rs.next()) {
-			System.out.println(rs.getLong("Id") + ", " + rs.getString("Name"));
+			
+			p.setId(rs.getLong("id"));
+			p.setName(rs.getString("name"));
+			p.setImageUrl(rs.getString("image_url"));
+			p.setDescription(rs.getString("description"));
+			p.setPrice(rs.getDouble("price"));
+			
+			
+			System.out.println();
 		}
 	}
 }
