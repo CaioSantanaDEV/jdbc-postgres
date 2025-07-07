@@ -4,26 +4,29 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import entities.Product;
+
 import db.DB;
+import entities.Order;
+import entities.OrderStatus;
+import entities.Product;
 
 public class Program {
 
 	public static void main(String[] args) throws SQLException {
 		
-		Product p = new Product();
+		
 		
 		Connection conn = DB.getConnection();
 	
 		Statement st = conn.createStatement();
 			
-		ResultSet rs = st.executeQuery("select * from tb_product");
+		ResultSet rs = st.executeQuery("select * from tb_order");
 			
 		while (rs.next()) {
 			
-			 p = instantiateProduct(rs);
-			
-			System.out.println(p);
+			 Order  order = instantiateOrder(rs);
+			 
+			System.out.println(order);
 		}
 	}
 	
@@ -41,4 +44,19 @@ public class Program {
 		
 	}
 	
+	private static Order instantiateOrder (ResultSet rs) throws SQLException {
+		
+		Order order = new Order();
+		
+		order.setId(rs.getLong("id"));
+		order.setLatitide(rs.getDouble("latitude"));
+		order.setLongitude(rs.getDouble("longitude"));
+		order.setMoment(rs.getTimestamp("moment").toInstant());
+		order.setStatus(OrderStatus.values()[rs.getInt("status")]);
+		
+		return order;
+		
+		
+	
+ }
 }
