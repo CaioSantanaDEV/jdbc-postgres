@@ -10,7 +10,7 @@ public class Order {
 	private Double longitude;
 	private Instant moment;
 	private OrderStatus status;
-	
+
 	private List<Product> products = new ArrayList<>();
 
 	public Long getId() {
@@ -67,9 +67,9 @@ public class Order {
 		this.status = status;
 		this.products = products;
 	}
-	
+
 	public Order() {
-		
+
 	}
 
 	@Override
@@ -77,5 +77,5 @@ public class Order {
 		return "Order [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ", moment=" + moment
 				+ ", status=" + status + ", products=" + products + "]";
 	}
-	 
+
 }
