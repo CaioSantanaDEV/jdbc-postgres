@@ -21,14 +21,24 @@ public class Program {
 			
 		while (rs.next()) {
 			
-			p.setId(rs.getLong("id"));
-			p.setName(rs.getString("name"));
-			p.setImageUrl(rs.getString("image_url"));
-			p.setDescription(rs.getString("description"));
-			p.setPrice(rs.getDouble("price"));
+			 p = instantiateProduct(rs);
 			
-			
-			System.out.println();
+			System.out.println(p);
 		}
 	}
+	
+	private static Product instantiateProduct (ResultSet rs) throws SQLException {
+		
+		Product p = new Product();
+		
+		p.setId(rs.getLong("id"));
+		p.setName(rs.getString("name"));
+		p.setImageUrl(rs.getString("image_uri"));
+		p.setDescription(rs.getString("description"));
+		p.setPrice(rs.getDouble("price"));
+		return p;
+		
+		
+	}
+	
 }
